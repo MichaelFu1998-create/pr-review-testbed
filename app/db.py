@@ -14,3 +14,10 @@ def find_user(conn: sqlite3.Connection, user_id: int):
     cur = conn.cursor()
     cur.execute("SELECT id, email, name FROM users WHERE id = ?", (user_id,))
     return cur.fetchone()
+
+
+def count_users(conn: sqlite3.Connection) -> int:
+    """Total number of users."""
+    cur = conn.cursor()
+    cur.execute("SELECT COUNT(*) AS n FROM users")
+    return cur.fetchone()["n"]
