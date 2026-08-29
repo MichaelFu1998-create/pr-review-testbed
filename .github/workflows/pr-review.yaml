@@ -6,6 +6,7 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  security-events: write
 
 concurrency:
   group: pr-review-${{ github.event.pull_request.number }}
@@ -19,10 +20,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: MichaelFu1998-create/pr-review-assistant@v2
+      - uses: MichaelFu1998-create/pr-review-assistant@feat/fix-state-callouts
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_pr_id: ${{ github.event.pull_request.number }}
           xai_api_key: ${{ secrets.XAI_API_KEY }}
           enable_scoring: "true"
+          output_sarif: pr-review.sarif
           logging: info
+
+      - uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: pr-review.sarif
