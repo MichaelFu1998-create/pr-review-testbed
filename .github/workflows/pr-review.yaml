@@ -19,7 +19,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: MichaelFu1998-create/pr-review-assistant@v2
+      - uses: MichaelFu1998-create/pr-review-assistant@feat/honest-output
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_pr_id: ${{ github.event.pull_request.number }}
