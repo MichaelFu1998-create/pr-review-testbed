@@ -24,6 +24,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_pr_id: ${{ github.event.pull_request.number }}
           xai_api_key: ${{ secrets.XAI_API_KEY }}
-          agent_mode: adaptive
           enable_scoring: "true"
           logging: info
